@@ -1,15 +1,17 @@
 const express = require("express");
 const multer = require("multer");
+
 const router = express.Router();
 
-const storageMulterHelper = require("../../helpers/storageMulter");
-const storage = storageMulterHelper();
+// const storageMulterHelper = require("../../helpers/storageMulter");
+// const storage = storageMulterHelper();
 
 // Upload file ảnh
-const upload = multer({ storage: storage });
+const upload = multer();
 
-const controller = require("../../controllers/admin/product.controller")
-const validate = require("../../validates/admin/product.validate")
+const controller = require("../../controllers/admin/product.controller");
+const validate = require("../../validates/admin/product.validate");
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware");
 
 router.get("/", controller.index);
 
@@ -27,10 +29,11 @@ router.get("/create", controller.create);
 
 // Phương thức post thêm mới sản phẩm
 router.post(
-    "/create", 
-    upload.single('thumbnail'), 
-    validate.createPost,
-    controller.createPost
+  "/create",
+  upload.single("thumbnail"),
+  uploadCloud.upload,
+  validate.createPost,
+  controller.createPost
 );
 
 // Phương thức edit sửa sản phẩm
@@ -38,10 +41,11 @@ router.get("/edit/:id", controller.edit);
 
 // Phương thức patch sửa mới sản phẩm
 router.patch(
-    "/edit/:id", 
-    upload.single('thumbnail'), 
-    validate.createPost,
-    controller.editPatch
+  "/edit/:id",
+  upload.single("thumbnail"),
+  uploadCloud.upload,
+  validate.createPost,
+  controller.editPatch
 );
 
 // Phương thức get chi tiết sản phẩm

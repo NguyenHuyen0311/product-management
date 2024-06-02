@@ -199,9 +199,9 @@ module.exports.createPost = async (req, res) => {
     // console.log(req.body);
 
     // Lấy đường dẫn ảnh và upload ảnh
-    if(req.file && req.file.filename) {
-        req.body.thumbnail = `/uploads/${req.file.filename}`;
-    }
+    // if(req.file && req.file.filename) {
+    //     req.body.thumbnail = `/uploads/${req.file.filename}`;
+    // }
     // console.log(req.file);
 
     // Tạo mới sản phẩm và lưu vào database
