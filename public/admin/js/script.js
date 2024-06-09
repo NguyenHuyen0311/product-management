@@ -268,3 +268,47 @@ if(uploadImage) {
         }
     });
 }
+
+// Sort
+const sort = document.querySelector("[sort]");
+if(sort) {
+    let url = new URL(window.location.href);
+
+    const sortSelect = sort.querySelector("[sort-select]"); 
+    const sortClear = sort.querySelector("[sort-clear]"); 
+    
+    // Sắp xếp 
+    sortSelect.addEventListener("change", (e) => {
+        const value = e.target.value;
+        const [sortKey, sortValue] = value.split("-");
+        // console.log(sortKey);
+        // console.log(sortValue);
+
+        url.searchParams.set("sortKey", sortKey);
+        url.searchParams.set("sortValue", sortValue);
+
+        window.location.href = url.href;
+    });
+
+    // Xóa sắp xếp
+    sortClear.addEventListener("click", () => {
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+
+        window.location.href = url.href;
+    });
+
+    // Hiển thị mặc định lựa chọn
+    const sortKey = url.searchParams.get("sortKey");
+    const sortValue = url.searchParams.get("sortValue");
+    
+    if(sortKey && sortValue) {
+        const stringSort = `${sortKey}-${sortValue}`;
+        const optionSelected = sortSelect.querySelector(`option[value='${stringSort}']`); // Lấy option đã chọn
+        // console.log(optionSelected);
+        optionSelected.selected = true; // thêm selected vào option
+        // optionSelected.setAttribute("selected", true); // cách khác
+    }
+    // console.log(sortKey);
+    // console.log(sortValue);
+}
