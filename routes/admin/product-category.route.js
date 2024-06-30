@@ -22,4 +22,15 @@ route.post(
   controller.createPost
 );
 
+// Phương thức get chỉnh sửa danh mục sản phẩm
+route.get("/edit/:id", controller.edit);
+
+// Phương thức post chỉnh sửa danh mục sản phẩm
+route.patch(
+  "/edit/:id",
+  upload.single("thumbnail"),
+  uploadCloud.upload,
+  controller.editPatch
+);
+
 module.exports = route;
