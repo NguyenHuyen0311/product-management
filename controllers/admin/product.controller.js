@@ -201,6 +201,15 @@ module.exports.create = async (req, res) => {
 
 // [POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
+    // Thêm authorization -server
+    // const permissions = res.locals.role.permissions;
+
+    // if(permissions.includes("products_create")) {
+            // console.log("Cho tạo mới");
+    // } else {
+    //     return;
+    // }
+
     // console.log(req.body);
 
     // Thay đổi type dữ liệu
