@@ -5,6 +5,7 @@ include ../../mixins/pagination.pug
 include ../../mixins/change-multi.pug
 include ../../mixins/alert.pug
 include ../../mixins/sort.pug
+include ../../mixins/moment.pug
 
 block main 
     if(role.permissions.includes("products_view"))
@@ -55,6 +56,7 @@ block main
                             th Giá
                             th Vị trí
                             th Trạng thái 
+                            th Người tạo  
                             th Hành động
 
                     tbody 
@@ -100,6 +102,11 @@ block main
                                                 data-status=item.status
                                                 data-id=item.id
                                             ) Dừng hoạt động
+                                    td
+                                        if(item.createdBy.accountFullName)
+                                            div #{item.createdBy.accountFullName}
+                                            div 
+                                                +formatDateTime(item.createdBy.createdAt)
                                     td
                                         if(role.permissions.includes("products_view"))
                                             a(

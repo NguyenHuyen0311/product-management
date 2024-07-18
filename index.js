@@ -11,6 +11,9 @@ const flash = require("express-flash");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
+// Thời gian
+const moment = require("moment");
+
 // TinyMCE
 const path = require('path');
 
@@ -56,6 +59,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
+app.locals.moment = moment;
 
 // Routes
 routeAdmin(app);
