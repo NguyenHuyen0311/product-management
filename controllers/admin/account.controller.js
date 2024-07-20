@@ -1,5 +1,5 @@
 // Mã hóa
-var md5 = require("md5");
+const md5 = require("md5");
 
 const Account = require("../../models/account.model");
 const Role = require("../../models/role.model");
@@ -73,7 +73,7 @@ module.exports.edit = async (req, res) => {
 // [PATCH] /admin/accounts/edit/:id
 module.exports.editPatch = async (req, res) => {
     if(req.body.password) {
-        // req.body.password = md5(req.body.password); // mã hóa password
+        req.body.password = md5(req.body.password); // mã hóa password
     } else {
         delete req.body.password; 
     }
@@ -82,4 +82,4 @@ module.exports.editPatch = async (req, res) => {
     await Account.updateOne({ _id: req.params.id }, req.body); // lưu vào database
   
     res.redirect("back");
-  };
+};
