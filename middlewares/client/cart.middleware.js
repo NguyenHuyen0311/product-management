@@ -13,6 +13,13 @@ module.exports.cartId = async (req, res, next) => {
         });
     } else {
         // Khi đã có giỏ hàng
+        const cart = await Cart.findOne({
+            _id: req.cookies.cartId
+        }); // lấy ra giỏ hàng
+
+        cart.totalQuantity = cart.products.reduce((sum, item) => sum + item.quantity, 0); // tổng số lượng sản phẩm trong giỏ hàng
+        
+        res.locals.miniCart = cart;
     }
 
     next();
