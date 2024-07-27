@@ -13,3 +13,11 @@ if(showAlert) {
         showAlert.classList.add("alert-hidden");
     }); // click x là ẩn
 }
+
+// Button Go Back
+const buttonGoBack = document.querySelectorAll("[button-go-back]");
+if(buttonGoBack.forEach(button => {
+    button.addEventListener("click", () => {
+        history.back();
+    });
+}));
